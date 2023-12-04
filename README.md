@@ -21,4 +21,7 @@ For example, to run problem 1, you would run:
 npm start -- 1
 ```
 
-Problems are organized as folders, with the code contained in the `main.ts` script and the data in `data.txt`.
+Problems are organized as folders, with three key files:
+- `input.txt`: The input generated from Advent of Code.
+- `main.ts`: The script contianing the primary code and I/O parsers.
+- `output.txt`: Contains the output stored as valid JSON strings.

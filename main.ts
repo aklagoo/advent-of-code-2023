@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'fs';
+import { existsSync, readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 
 const ERROR_INVALID_COMMAND = `
@@ -26,11 +26,20 @@ const dir = path.join(__dirname, process.argv[2]);
 if (!existsSync(dir)) process.exit(2);
 
 import(path.join(dir, 'main.ts')).then(module => {
-  const data = readFileSync(path.join(dir, 'data.txt')).toString();
-  if ('parse' in module){
-    module.main(module.parse(data));
-  }
-  else {
-    module.main(data);
-  }
+  // Read the input.
+  const data = readFileSync(path.join(dir, 'input.txt')).toString();
+
+  // Calculate the answer.
+  const ans = 'parseInput' in module? module.main(module.parseInput(data)): module.main(data);
+
+  // Write the answer.
+  let out;
+  if(ans == undefined)
+    out = '';
+  else if ('parseOutput' in module)
+    out = JSON.stringify(module.parseOutput(ans));
+  else
+    out = JSON.stringify(ans);
+
+  writeFileSync(path.join(dir, 'output.txt'), out);
 })

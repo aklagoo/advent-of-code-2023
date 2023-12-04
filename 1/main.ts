@@ -1,4 +1,4 @@
-export function parse(contents: string): string[] {
+export function parseInput(contents: string): string[] {
   return contents.split(/\r?\n/);
 }
 
