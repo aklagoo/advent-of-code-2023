@@ -1,5 +1,8 @@
 # Advent of Code 2023
 
+![Static Badge](https://img.shields.io/badge/problem-3a-yellow)
+![Static Badge](https://img.shields.io/badge/status-failing-red)
+
 This repository tracks my progress towards solving [Advent of Code 2023](https://adventofcode.com/2023)
 with TypeScript.
 
