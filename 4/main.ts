@@ -1,6 +1,12 @@
+interface Pick {
+  count: number;
+  color: string;
+}
+
+
 interface Game {
   gameId: number;
-  picks: string[][][];
+  picks: Pick[][];
 }
 
 
@@ -10,7 +16,8 @@ export function parseInput(contents: string): Game[] {
     const gameId = parseInt(parts[0].slice(5));
     const picks = parts[1]
       .split(';')
-      .map(x => x.split(', ').map(y => y.trim().split(' ')));
+      .map(x => x.split(', ')
+      .map(y => y.trim().split(' ')).map(y => ({ count: parseInt(y[0]), color: y[1] })));
     return { gameId, picks }
   });
 }
@@ -27,8 +34,8 @@ export function main(games: Game[]) {
     };
     game.picks.forEach(subGames => {
       subGames.forEach(subGame => {
-        const count = parseInt(subGame[0]);
-        const color = subGame[1];
+        const count = subGame.count;
+        const color = subGame.color;
         counts[color] = Math.max(counts[color], count);
       })
     })
